@@ -1,0 +1,35 @@
+music_decision_tree: 
+
+
+
+
+
+import pandas as pd   
+import numpy as np
+dataset = pd.read_csv('music.csv')   
+dataset.head() 
+
+X =dataset.drop('target', axis=1)   
+y =dataset['target']    
+
+from sklearn.model_selection import train_test_split 
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)   
+from sklearn.tree import DecisionTreeClassifier   
+
+classifier =DecisionTreeClassifier()   
+classifier.fit(X_train,y_train)   
+y_pred =classifier.predict(X_test) 
+y_pred 
+
+from sklearn.metrics import classification_report, accuracy_score 
+
+print(classification_report(y_test,y_pred)) 
+
+print(accuracy_score(y_test,y_pred)) 
+
+
+demo=[[0.0415,0.941,0.6,0.01,5,5.240,1,0.00,0.695,1196],[0.0415,0.451,0.685,0.000000,10,-5.0,0,0.07,0.6,119]]
+
+y=classifier.predict(demo)
+y[0]
